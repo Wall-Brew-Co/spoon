@@ -1,0 +1,29 @@
+{
+  "name": "spoon",
+  "version": "1.0.0",
+  "description": "A collection of non-domain-specific utility functions",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "karma": "^6.3.2",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-cljs-test": "^0.1.0",
+    "karma-firefox-launcher": "^1.2.0",
+    "minimist": ">=1.2.6"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nnichols/spoon.git"
+  },
+  "author": "nnichols",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nnichols/spoon/issues"
+  },
+  "homepage": "https://github.com/nnichols/spoon#readme"
+}

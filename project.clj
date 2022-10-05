@@ -1,8 +1,38 @@
-(defproject com.wallbrew/{{template}} "1.0.0"
-  :description "TODO: Fill me in!"
-  :url "https://github.com/Wall-Brew-Co/{{template}}"
+(defproject com.wallbrew/spoon "1.0.0"
+  :description "A collection of non-domain-specific utility functions"
+  :url "https://github.com/Wall-Brew-Co/spoon"
   :license {:name "MIT"
             :url  "https://opensource.org/licenses/MIT"}
-  :dependencies [[org.clojure/clojure "1.10.0"]]
-  :profiles {:uberjar {:aot :all}}
-  :min-lein-version "2.5.3")
+  :dependencies [[org.clojure/clojure "1.11.1"]
+                 [org.clojure/clojurescript "1.11.60" :scope "provided"]]
+  :plugins [[lein-cljsbuild "1.1.8"]]
+  :resource-paths ["resources"]
+
+  :aliases {"test-build" ["do" "clean" ["cljsbuild" "once" "test"] ["doo" "once"] ["test"]]}
+
+  :profiles {:uberjar {:aot :all}
+             :dev     {:dependencies [[doo "0.1.11"]
+                                      [org.clojure/test.check "1.1.1"]]
+                       :plugins      [[lein-doo "0.1.11"]]}}
+
+  :min-lein-version "2.5.3"
+
+  :cljsbuild {:builds [{:id           "test"
+                        :source-paths ["src" "test"]
+                        :compiler     {:main           "com.wallbrew.spoon.runner"
+                                       :output-to      "target/test/app.js"
+                                       :output-dir     "target/test/js/compiled/out"
+                                       :optimizations  :none
+                                       :parallel-build true}}]}
+
+  :doo {:build "test"
+        :alias {:default [:chrome-headless-no-sandbox]}
+        :paths {:karma "./node_modules/karma/bin/karma"}
+        :karma {:launchers {:chrome-headless-no-sandbox {:plugin "karma-chrome-launcher"
+                                                         :name   "ChromeHeadlessNoSandbox"}}
+                :config    {"captureTimeout"             210000
+                            "browserDisconnectTolerance" 3
+                            "browserDisconnectTimeout"   210000
+                            "browserNoActivityTimeout"   210000
+                            "customLaunchers"            {"ChromeHeadlessNoSandbox" {"base"  "ChromeHeadless"
+                                                                                     "flags" ["--no-sandbox" "--disable-dev-shm-usage"]}}}}})
