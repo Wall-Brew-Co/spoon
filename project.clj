@@ -5,8 +5,13 @@
             :url  "https://opensource.org/licenses/MIT"}
   :dependencies [[org.clojure/clojure "1.11.1"]
                  [org.clojure/clojurescript "1.11.60" :scope "provided"]]
-  :plugins [[lein-cljsbuild "1.1.8"]]
+  :plugins [[lein-cljsbuild "1.1.8"]
+            [lein-project-version "0.1.0"]]
   :resource-paths ["resources"]
+  :deploy-repositories [["clojars" {:url           "https://clojars.org/repo"
+                                    :username      :env/clojars_user
+                                    :password      :env/clojars_pass
+                                    :sign-releases false}]]
 
   :aliases {"test-build" ["do" "clean" ["cljsbuild" "once" "test"] ["doo" "once"] ["test"]]}
 
