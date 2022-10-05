@@ -1,0 +1,137 @@
+(ns com.wallbrew.spoon.string-test
+  (:require [clojure.spec.alpha :as s]
+            [clojure.spec.gen.alpha :as gen]
+            [clojure.test :refer [deftest is testing]]
+            [clojure.test.check.clojure-test :as check.test]
+            [clojure.test.check.generators :as generate]
+            [clojure.test.check.properties :as prop]
+            [com.wallbrew.spoon.string :as sut]))
+
+
+(s/def ::string string?)
+
+
+(deftest same-text?-test
+  (testing "same-text? is a function from a tuple of strings to a boolean"
+    (is (boolean? (sut/same-text? (gen/generate (s/gen ::string)) (gen/generate (s/gen ::string))))))
+  (testing "Strings containing matching characters after perparation match"
+    (is (true? (sut/same-text? "   clojure" "CLOJURE   ")))
+    (is (true? (sut/same-text? "clojure   " "   CLOJURE   " {:upper-case? true})))
+    (is (true? (sut/same-text? "   100 LINES OF CODE" "100 LINES OF CODE   ")))
+    (is (false? (sut/same-text? "clo jure" "CLOJURE")))
+    (is (false? (sut/same-text? "100" "!))" {:upper-case? true})))))
+
+
+#_{:clj-kondo/ignore [:unresolved-symbol]}
+
+
+(check.test/defspec
+  same-text?-spec 100
+  (prop/for-all
+    [s1 generate/string
+     s2 generate/string]
+    (boolean? (sut/same-text? s1 s2))))
+
+
+#_{:clj-kondo/ignore [:unresolved-symbol]}
+
+
+(check.test/defspec
+  same-text?-spec-upper-case 100
+  (prop/for-all
+    [s1 generate/string
+     s2 generate/string]
+    (boolean? (sut/same-text? s1 s2 {:upper-case? true}))))
+
+
+#_{:clj-kondo/ignore [:unresolved-symbol]}
+
+
+(check.test/defspec
+  same-text?-spec-lower-case 100
+  (prop/for-all
+    [s1 generate/string
+     s2 generate/string]
+    (boolean? (sut/same-text? s1 s2 {:upper-case? false}))))
+
+
+(deftest includes?-test
+  (testing "same-text? is a function from a tuple of strings to a boolean"
+    (is (boolean? (sut/includes? (gen/generate (s/gen ::string)) (gen/generate (s/gen ::string))))))
+  (testing "Strings containing matching characters after perparation match"
+    (is (true? (sut/includes? "   clojure" "CLOJURE   ")))
+    (is (true? (sut/includes? "CLOJURE   " "c")))
+    (is (true? (sut/includes? "clojure   " "   CLOJURE   " {:upper-case? true})))
+    (is (true? (sut/includes? "100 LINES OF CODE   " "   100 ")))
+    (is (false? (sut/includes? "clo" "CLOJURE")))
+    (is (false? (sut/includes? "100" "!))" {:upper-case? true})))))
+
+
+#_{:clj-kondo/ignore [:unresolved-symbol]}
+
+
+(check.test/defspec
+  includes?-spec 100
+  (prop/for-all
+    [s1 generate/string
+     s2 generate/string]
+    (boolean? (sut/includes? s1 s2))))
+
+
+#_{:clj-kondo/ignore [:unresolved-symbol]}
+
+
+(check.test/defspec
+  includes?-spec-upper-case 100
+  (prop/for-all
+    [s1 generate/string
+     s2 generate/string]
+    (boolean? (sut/includes? s1 s2 {:upper-case? true}))))
+
+
+#_{:clj-kondo/ignore [:unresolved-symbol]}
+
+
+(check.test/defspec
+  includes?-spec-lower-case 100
+  (prop/for-all
+    [s1 generate/string
+     s2 generate/string]
+    (boolean? (sut/includes? s1 s2 {:upper-case? false}))))
+
+
+#_{:clj-kondo/ignore [:unresolved-symbol]}
+
+
+(check.test/defspec
+  ->spongebob-case-type 100
+  (prop/for-all
+    [s generate/string]
+    (string? (sut/->spongebob-case s))))
+
+
+#_{:clj-kondo/ignore [:unresolved-symbol]}
+
+
+(check.test/defspec
+  ->sporadic-case-type 100
+  (prop/for-all
+    [s generate/string]
+    (string? (sut/->sporadic-case s))))
+
+
+(deftest ->sporadic-case-test
+  (testing "->sporadic-case is a function from a string to a string"
+    (is (string? (sut/->sporadic-case (gen/generate (s/gen ::string))))))
+  (testing "->sporadic-case, for English text, returns a `same-text?` string"
+    (let [s "This is a test string"]
+      (is (sut/same-text? s (sut/->sporadic-case s))))))
+
+
+(deftest ->spongebob-case-test
+  (testing "->spongebob-case is a function from a string to a string"
+    (is (string? (sut/->spongebob-case (gen/generate (s/gen ::string))))))
+  (testing "->spongebob-case, for English text, returns a `same-text?` string"
+    (let [s "This is a test string"]
+      (is (sut/same-text? s (sut/->spongebob-case s)))
+      (is (= "tHiS Is a tEsT StRiNg" (sut/->spongebob-case s))))))

@@ -1,13 +1,14 @@
-# clojure-template
+# spoon - A clojure utility library
 
-A template repository for Clojure Wall Brew projects.
+> The only tool we need is a big-ass brew spoon.
+> Dareknotderek
 
-To utilize this template, simply replace all instances of the literal string `{{template}}` with the project name of your choice.
+## Under Construction
 
-Be sure to update the folders named `template` beneath `src` and `test` too.
+The README is under construction while preparing for public release.
 
-Includes:
+## License
 
-- Basic CI/CD via GitHub Actions
-- Makefile/shell scripts for version changes
-- Default License/Changelog/Community Standards
+Copyright © 2019-2022 - [Wall Brew Co](https://wallbrew.com/)
+
+This software is provided for free, public use as outlined in the [MIT License](https://github.com/Wall-Brew-Co/spoon/blob/master/LICENSE)
