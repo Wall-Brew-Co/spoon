@@ -1,5 +1,10 @@
 # spoon - A clojure utility library
 
+[![Clojars Project](https://img.shields.io/clojars/v/com.wallbrew/spoon.svg)](https://clojars.org/com.wallbrew/spoon)
+[![cljdoc badge](https://cljdoc.org/badge/com.wallbrew/spoon)](https://cljdoc.org/d/com.wallbrew/spoon/CURRENT)
+[![GitHub](https://img.shields.io/github/license/Wall-Brew-Co/spoon)](https://github.com/Wall-Brew-Co/spoon/blob/master/LICENSE)
+[![Twitter Follow](https://img.shields.io/twitter/follow/WallBrew?style=social)](https://twitter.com/WallBrew)
+
 > The only tool we need is a big-ass brew spoon.
 > Dareknotderek
 
