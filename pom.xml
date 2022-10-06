@@ -4,7 +4,7 @@
   <groupId>com.wallbrew</groupId>
   <artifactId>spoon</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <name>spoon</name>
   <description>A collection of non-domain-specific utility functions</description>
   <url>https://github.com/Wall-Brew-Co/spoon</url>
@@ -18,7 +18,7 @@
     <url>https://github.com/Wall-Brew-Co/spoon</url>
     <connection>scm:git:git://github.com/Wall-Brew-Co/spoon.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/Wall-Brew-Co/spoon.git</developerConnection>
-    <tag>a880491d46b1a4b040efccdae762e092974601de</tag>
+    <tag>ea8c41cef81e08ebd3b815c73c6d52d8d0acf88f</tag>
   </scm>
   <build>
     <sourceDirectory>src</sourceDirectory>
@@ -66,12 +66,24 @@
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>clojure</artifactId>
-      <version>1.10.0</version>
+      <version>1.11.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.clojure</groupId>
+      <artifactId>clojurescript</artifactId>
+      <version>1.11.60</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>doo</groupId>
       <artifactId>doo</artifactId>
       <version>0.1.11</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.clojure</groupId>
+      <artifactId>test.check</artifactId>
+      <version>1.1.1</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

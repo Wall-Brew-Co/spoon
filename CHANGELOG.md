@@ -1,3 +1,7 @@
+## v1.0.1 / 2022 Oct 6
+
+> Fix automatic deployment/tagging
+
 ## v1.0.0 / 2022 Oct 6
 
 > Initial deployment of spoon

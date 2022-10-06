@@ -5,7 +5,7 @@
 
 (defmacro when-let+
   "A multiple bindings version of `clojure.core/when-let`.
-   If all bindings evaluate truthy, the body will be evaluated in an implictit `do` in which all bindings are bound to the value of their test.
+   If all bindings evaluate truthy, the body will be evaluated in an implicit `do` in which all bindings are bound to the value of their test.
    If any binding evaluates falsey, the body will not be evaluated and nil will be returned.
    If multiple forms are provided, the last form will be returned.
    
