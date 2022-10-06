@@ -1,6 +1,6 @@
 {
   "name": "spoon",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A collection of non-domain-specific utility functions",
   "main": "index.js",
   "directories": {
