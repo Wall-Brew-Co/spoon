@@ -1,8 +1,7 @@
 (ns com.wallbrew.spoon.string
   "Functions for working with strings."
   {:added "1.0"}
-  (:require [clojure.string :as str]
-            [clojure.spec.alpha :ss s])
+  (:require [clojure.string :as str])
   #?(:clj (:import [java.text Normalizer Normalizer$Form])))
 
 
