@@ -1,8 +1,12 @@
-(defproject com.wallbrew/spoon "1.0.1"
+(defproject com.wallbrew/spoon "1.1.0"
   :description "A collection of non-domain-specific utility functions"
   :url "https://github.com/Wall-Brew-Co/spoon"
-  :license {:name "MIT"
-            :url  "https://opensource.org/licenses/MIT"}
+  :license {:name         "MIT"
+            :url          "https://opensource.org/licenses/MIT"
+            :distribution :repo
+            :comments     "Same-as all Wall-Brew projects"}
+  :scm {:name "git"
+        :url  "https://github.com/Wall-Brew-Co/spoon"}
   :dependencies [[org.clojure/clojure "1.11.1"]
                  [org.clojure/clojurescript "1.11.60" :scope "provided"]]
   :plugins [[lein-cljsbuild "1.1.8"]

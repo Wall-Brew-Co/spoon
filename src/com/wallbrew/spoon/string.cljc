@@ -1,7 +1,8 @@
 (ns com.wallbrew.spoon.string
   "Functions for working with strings."
   {:added "1.0"}
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str])
+  #?(:clj (:import [java.text Normalizer Normalizer$Form])))
 
 
 (defn- prepare-for-compare
@@ -105,3 +106,21 @@
             (let [casing-fn (if (odd? (count acc)) str/upper-case str/lower-case)]
               (str acc (casing-fn l))))]
     (reduce spongebob-case "" (seq s))))
+
+
+#?(:clj
+   (defn ->slug
+     "Take a string `s` and return a [slug-ified](https://en.wikipedia.org/wiki/Clean_URL#Slug) string.
+   
+     For example:
+   
+     ```clj
+       (->slug \"Nick's recipe\" \"nicks-recipe\")
+     ```"
+     {:added "1.1"}
+     [^String s]
+     (let [normalized-s  (Normalizer/normalize s Normalizer$Form/NFD)
+           asciified-s   (str/replace normalized-s #"[\P{ASCII}]+" "")
+           lower-cased-s (str/lower-case asciified-s)
+           split-s       (str/split (str/triml lower-cased-s) #"[\p{Space}\p{P}]+")]
+       (str/join "-" split-s))))

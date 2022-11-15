@@ -1,3 +1,7 @@
+## v1.1.0 / 2022 Nov 14
+
+* **Added** - A string function for creating slugs named `->slug`
+
 ## v1.0.1 / 2022 Oct 6
 
 > Fix automatic deployment/tagging

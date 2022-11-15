@@ -14,7 +14,7 @@
 (deftest same-text?-test
   (testing "same-text? is a function from a tuple of strings to a boolean"
     (is (boolean? (sut/same-text? (gen/generate (s/gen ::string)) (gen/generate (s/gen ::string))))))
-  (testing "Strings containing matching characters after perparation match"
+  (testing "Strings containing matching characters after preparation match"
     (is (true? (sut/same-text? "   clojure" "CLOJURE   ")))
     (is (true? (sut/same-text? "clojure   " "   CLOJURE   " {:upper-case? true})))
     (is (true? (sut/same-text? "   100 LINES OF CODE" "100 LINES OF CODE   ")))
@@ -58,7 +58,7 @@
 (deftest includes?-test
   (testing "same-text? is a function from a tuple of strings to a boolean"
     (is (boolean? (sut/includes? (gen/generate (s/gen ::string)) (gen/generate (s/gen ::string))))))
-  (testing "Strings containing matching characters after perparation match"
+  (testing "Strings containing matching characters after preparation match"
     (is (true? (sut/includes? "   clojure" "CLOJURE   ")))
     (is (true? (sut/includes? "CLOJURE   " "c")))
     (is (true? (sut/includes? "clojure   " "   CLOJURE   " {:upper-case? true})))
@@ -135,3 +135,22 @@
     (let [s "This is a test string"]
       (is (sut/same-text? s (sut/->spongebob-case s)))
       (is (= "tHiS Is a tEsT StRiNg" (sut/->spongebob-case s))))))
+
+
+#?(:clj
+   (deftest ->slug-test
+     (testing "->slug can modify non-special strings"
+       (is (= "charlie-brown" (sut/->slug "charlie brown")))
+       (is (= "charlie-brown" (sut/->slug "Charlie Brown"))))
+     (testing "->slug coerces non-ascii characters to their closest equivalent"
+       (is (= "aaaaaaaaaa" (sut/->slug "áÁàÀãÃâÂäÄ")))
+       (is (= "eeeeeeeeee" (sut/->slug "éÉèÈẽẼêÊëË")))
+       (is (= "iiiiiiiiii" (sut/->slug "íÍìÌĩĨîÎïÏ")))
+       (is (= "oooooooooo" (sut/->slug "óÓòÒõÕôÔöÖ")))
+       (is (= "uuuuuuuuuu" (sut/->slug "úÚùÙũŨûÛüÜ")))
+       (is (= "cccccc" (sut/->slug "ćĆĉĈçÇ"))))
+     (testing "->slug is a function from a string to a string"
+       (is (string? (sut/->slug (gen/generate (s/gen ::string))))))
+     (testing "->slug returns an identical value when called on a slug"
+       (let [s (gen/generate (s/gen ::string))]
+         (is (= (sut/->slug s) (sut/->slug (sut/->slug s))))))))
