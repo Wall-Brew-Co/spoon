@@ -107,7 +107,8 @@
               (str acc (casing-fn l))))]
     (reduce spongebob-case "" (seq s))))
 
-#?(:clj 
+
+#?(:clj
    (defn ->slug
      "Take a string `s` and return a [slug-ified](https://en.wikipedia.org/wiki/Clean_URL#Slug) string.
    

@@ -136,7 +136,8 @@
       (is (sut/same-text? s (sut/->spongebob-case s)))
       (is (= "tHiS Is a tEsT StRiNg" (sut/->spongebob-case s))))))
 
-#?(:clj 
+
+#?(:clj
    (deftest ->slug-test
      (testing "->slug can modify non-special strings"
        (is (= "charlie-brown" (sut/->slug "charlie brown")))
