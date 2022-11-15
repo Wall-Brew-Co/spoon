@@ -14,7 +14,7 @@
 (deftest same-text?-test
   (testing "same-text? is a function from a tuple of strings to a boolean"
     (is (boolean? (sut/same-text? (gen/generate (s/gen ::string)) (gen/generate (s/gen ::string))))))
-  (testing "Strings containing matching characters after perparation match"
+  (testing "Strings containing matching characters after preparation match"
     (is (true? (sut/same-text? "   clojure" "CLOJURE   ")))
     (is (true? (sut/same-text? "clojure   " "   CLOJURE   " {:upper-case? true})))
     (is (true? (sut/same-text? "   100 LINES OF CODE" "100 LINES OF CODE   ")))
@@ -58,7 +58,7 @@
 (deftest includes?-test
   (testing "same-text? is a function from a tuple of strings to a boolean"
     (is (boolean? (sut/includes? (gen/generate (s/gen ::string)) (gen/generate (s/gen ::string))))))
-  (testing "Strings containing matching characters after perparation match"
+  (testing "Strings containing matching characters after preparation match"
     (is (true? (sut/includes? "   clojure" "CLOJURE   ")))
     (is (true? (sut/includes? "CLOJURE   " "c")))
     (is (true? (sut/includes? "clojure   " "   CLOJURE   " {:upper-case? true})))
