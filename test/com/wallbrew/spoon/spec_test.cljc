@@ -1,13 +1,13 @@
 (ns com.wallbrew.spoon.spec-test
-  (:require [clojure.spec.alpha :as s]
+  (:require [clojure.spec.alpha :as spec]
             [clojure.string :as str]
             [clojure.test :refer [deftest is testing]]
             [com.wallbrew.spoon.spec :as sut]))
 
 
-(s/def ::int int?)
-(s/def ::string (s/and string? #(not (str/blank? %))))
-(s/def ::sample (s/keys :req-un [::int] :opt-un [::string]))
+(spec/def ::int int?)
+(spec/def ::string (spec/and string? #(not (str/blank? %))))
+(spec/def ::sample (spec/keys :req-un [::int] :opt-un [::string]))
 
 
 (deftest test-valid?-test

@@ -1,7 +1,7 @@
 (ns com.wallbrew.spoon.spec
   "Fuctions used in conjunction with `clojure.spec.alpha`."
   {:added "1.0"}
-  (:require [clojure.spec.alpha :as s]))
+  (:require [clojure.spec.alpha :as spec]))
 
 
 (defn test-valid?
@@ -19,6 +19,6 @@
   {:added    "1.0"
    :see-also ["clojure.spec.alpha/explain-str" "clojure.spec.alpha/valid?"]}
   [spec value]
-  (if (s/valid? spec value)
+  (if (spec/valid? spec value)
     true
-    (s/explain-str spec value)))
+    (spec/explain-str spec value)))

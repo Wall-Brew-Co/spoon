@@ -1,5 +1,5 @@
 (ns com.wallbrew.spoon.string-test
-  (:require [clojure.spec.alpha :as s]
+  (:require [clojure.spec.alpha :as spec]
             [clojure.spec.gen.alpha :as gen]
             [clojure.test :refer [deftest is testing]]
             [clojure.test.check.clojure-test :as check.test]
@@ -8,12 +8,12 @@
             [com.wallbrew.spoon.string :as sut]))
 
 
-(s/def ::string string?)
+(spec/def ::string string?)
 
 
 (deftest same-text?-test
   (testing "same-text? is a function from a tuple of strings to a boolean"
-    (is (boolean? (sut/same-text? (gen/generate (s/gen ::string)) (gen/generate (s/gen ::string))))))
+    (is (boolean? (sut/same-text? (gen/generate (spec/gen ::string)) (gen/generate (spec/gen ::string))))))
   (testing "Strings containing matching characters after preparation match"
     (is (true? (sut/same-text? "   clojure" "CLOJURE   ")))
     (is (true? (sut/same-text? "clojure   " "   CLOJURE   " {:upper-case? true})))
@@ -57,7 +57,7 @@
 
 (deftest includes?-test
   (testing "same-text? is a function from a tuple of strings to a boolean"
-    (is (boolean? (sut/includes? (gen/generate (s/gen ::string)) (gen/generate (s/gen ::string))))))
+    (is (boolean? (sut/includes? (gen/generate (spec/gen ::string)) (gen/generate (spec/gen ::string))))))
   (testing "Strings containing matching characters after preparation match"
     (is (true? (sut/includes? "   clojure" "CLOJURE   ")))
     (is (true? (sut/includes? "CLOJURE   " "c")))
@@ -122,7 +122,7 @@
 
 (deftest ->sporadic-case-test
   (testing "->sporadic-case is a function from a string to a string"
-    (is (string? (sut/->sporadic-case (gen/generate (s/gen ::string))))))
+    (is (string? (sut/->sporadic-case (gen/generate (spec/gen ::string))))))
   (testing "->sporadic-case, for English text, returns a `same-text?` string"
     (let [s "This is a test string"]
       (is (sut/same-text? s (sut/->sporadic-case s))))))
@@ -130,7 +130,7 @@
 
 (deftest ->spongebob-case-test
   (testing "->spongebob-case is a function from a string to a string"
-    (is (string? (sut/->spongebob-case (gen/generate (s/gen ::string))))))
+    (is (string? (sut/->spongebob-case (gen/generate (spec/gen ::string))))))
   (testing "->spongebob-case, for English text, returns a `same-text?` string"
     (let [s "This is a test string"]
       (is (sut/same-text? s (sut/->spongebob-case s)))
@@ -150,7 +150,7 @@
        (is (= "uuuuuuuuuu" (sut/->slug "úÚùÙũŨûÛüÜ")))
        (is (= "cccccc" (sut/->slug "ćĆĉĈçÇ"))))
      (testing "->slug is a function from a string to a string"
-       (is (string? (sut/->slug (gen/generate (s/gen ::string))))))
+       (is (string? (sut/->slug (gen/generate (spec/gen ::string))))))
      (testing "->slug returns an identical value when called on a slug"
-       (let [s (gen/generate (s/gen ::string))]
+       (let [s (gen/generate (spec/gen ::string))]
          (is (= (sut/->slug s) (sut/->slug (sut/->slug s))))))))

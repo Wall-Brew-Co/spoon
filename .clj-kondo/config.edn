@@ -15,7 +15,7 @@
                                                              clojure.tools.cli     cli
                                                              clojure.java.shell    sh
                                                              clojure.pprint        pp
-                                                             clojure.spec.alpha    s
+                                                             clojure.spec.alpha    spec
                                                              clojure.string        str
                                                              clojure.core.matrix   mat
                                                              clojure.tools.logging log
