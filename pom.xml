@@ -4,7 +4,7 @@
   <groupId>com.wallbrew</groupId>
   <artifactId>spoon</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.1</version>
+  <version>1.1.0</version>
   <name>spoon</name>
   <description>A collection of non-domain-specific utility functions</description>
   <url>https://github.com/Wall-Brew-Co/spoon</url>
@@ -12,13 +12,15 @@
     <license>
       <name>MIT</name>
       <url>https://opensource.org/licenses/MIT</url>
+      <distribution>repo</distribution>
+      <comments>Same-as all Wall-Brew projects</comments>
     </license>
   </licenses>
   <scm>
     <url>https://github.com/Wall-Brew-Co/spoon</url>
     <connection>scm:git:git://github.com/Wall-Brew-Co/spoon.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/Wall-Brew-Co/spoon.git</developerConnection>
-    <tag>ea8c41cef81e08ebd3b815c73c6d52d8d0acf88f</tag>
+    <tag>ccbd3b7520ef281f30ed9356cd4981cfd916d5a3</tag>
   </scm>
   <build>
     <sourceDirectory>src</sourceDirectory>

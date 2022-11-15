@@ -2,12 +2,7 @@ dotfiles:
   - .github/**/*
   - .gitignore
   - .editorconfig
-
-recipes:
-  - src/brew_bot/calculators.cljc
-  - src/brew_bot/generators.cljc
-  - src/brew_bot/ingredients.cljc
-  - src/brew_bot/weights.cljc
+  - .cljstyle
 
 restricted:
   - LICENSE

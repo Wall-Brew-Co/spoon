@@ -4,6 +4,7 @@
 -  [`com.wallbrew.spoon.spec`](#com.wallbrew.spoon.spec)  - Fuctions used in conjunction with <code>clojure.spec.alpha</code>.
     -  [`test-valid?`](#com.wallbrew.spoon.spec/test-valid?) - Tests if <code>value</code> is a valid instance of <code>spec</code>.
 -  [`com.wallbrew.spoon.string`](#com.wallbrew.spoon.string)  - Functions for working with strings.
+    -  [`->slug`](#com.wallbrew.spoon.string/->slug) - Take a string <code>s</code> and return a [slug-ified](https://en.wikipedia.org/wiki/Clean_URL#Slug) string.
     -  [`->spongebob-case`](#com.wallbrew.spoon.string/->spongebob-case) - Take a string <code>s</code> and coerce characters alternatively between lower and upper case.
     -  [`->sporadic-case`](#com.wallbrew.spoon.string/->sporadic-case) - Take a string <code>s</code> and randomly coerce characters to either lower or upper case.
     -  [`includes?`](#com.wallbrew.spoon.string/includes?) - Checks to see if <code>s1</code> includes <code>s2</code> after each string has been modified by <code>prepare-for-compare</code>.
@@ -82,6 +83,22 @@ Functions for working with strings.
 
 
 
+
+## <a name="com.wallbrew.spoon.string/->slug">`->slug`</a> [:page_facing_up:](null)
+<a name="com.wallbrew.spoon.string/->slug"></a>
+``` clojure
+
+(->slug s)
+```
+
+
+Take a string `s` and return a [slug-ified](https://en.wikipedia.org/wiki/Clean_URL#Slug) string.
+   
+     For example:
+   
+     ```clj
+       (->slug "Nick's recipe" "nicks-recipe")
+     ```
 
 ## <a name="com.wallbrew.spoon.string/->spongebob-case">`->spongebob-case`</a> [:page_facing_up:](null)
 <a name="com.wallbrew.spoon.string/->spongebob-case"></a>
