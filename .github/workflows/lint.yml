@@ -17,6 +17,7 @@ jobs:
           github_token: ${{ secrets.WALL_BREW_BOT_PAT }}
           locale: "US"
           reporter: github-pr-review
+          level: error
           filter_mode: file
 
   clj-kondo:
