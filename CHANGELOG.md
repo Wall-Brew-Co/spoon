@@ -6,10 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## Table of Contents
 
+* [1.2.1 - 2023-02-12](#121---2023-02-12)
 * [1.2.0 - 2023-02-12](#120---2023-02-12)
 * [1.1.0 - 2022-11-14](#110---2022-11-14)
 * [1.0.1 - 2022-10-06](#101---2022-10-06)
 * [1.0.0 - 2022-10-06](#100---2022-10-06)
+
+## 1.2.1 - 2023-02-12
+
+* Fixed
+  * cljdoc configuration error that prevented docs from being generated.
 
 ## 1.2.0 - 2023-02-12
 
