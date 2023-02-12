@@ -59,6 +59,7 @@
   (testing "same-text? is a function from a tuple of strings to a boolean"
     (is (boolean? (sut/includes? (gen/generate (spec/gen ::string)) (gen/generate (spec/gen ::string))))))
   (testing "Strings containing matching characters after preparation match"
+    (is (true? (sut/includes? "" "")))
     (is (true? (sut/includes? "   clojure" "CLOJURE   ")))
     (is (true? (sut/includes? "CLOJURE   " "c")))
     (is (true? (sut/includes? "clojure   " "   CLOJURE   " {:upper-case? true})))
@@ -86,7 +87,8 @@
   (prop/for-all
     [s1 generate/string
      s2 generate/string]
-    (boolean? (sut/includes? s1 s2 {:upper-case? true}))))
+    (and (boolean? (sut/includes? s1 s2 {:upper-case? true}))
+         (boolean? (sut/includes? s1 s2 {sut/cast-to-uppercase? true})))))
 
 
 #_{:clj-kondo/ignore [:unresolved-symbol]}
@@ -97,7 +99,8 @@
   (prop/for-all
     [s1 generate/string
      s2 generate/string]
-    (boolean? (sut/includes? s1 s2 {:upper-case? false}))))
+    (and (boolean? (sut/includes? s1 s2 {:upper-case? false}))
+         (boolean? (sut/includes? s1 s2 {:sut/cast-to-uppercase? false})))))
 
 
 #_{:clj-kondo/ignore [:unresolved-symbol]}
@@ -125,7 +128,10 @@
     (is (string? (sut/->sporadic-case (gen/generate (spec/gen ::string))))))
   (testing "->sporadic-case, for English text, returns a `same-text?` string"
     (let [s "This is a test string"]
-      (is (sut/same-text? s (sut/->sporadic-case s))))))
+      (is (sut/same-text? s (sut/->sporadic-case s)))))
+  (testing "Blank strings are returned as-is"
+    (is (= "" (sut/->sporadic-case "")))
+    (is (= " " (sut/->sporadic-case " ")))))
 
 
 (deftest ->spongebob-case-test
@@ -134,14 +140,18 @@
   (testing "->spongebob-case, for English text, returns a `same-text?` string"
     (let [s "This is a test string"]
       (is (sut/same-text? s (sut/->spongebob-case s)))
-      (is (= "tHiS Is a tEsT StRiNg" (sut/->spongebob-case s))))))
+      (is (= "tHiS Is a tEsT StRiNg" (sut/->spongebob-case s)))))
+  (testing "Blank strings are returned as-is"
+    (is (= "" (sut/->spongebob-case "")))
+    (is (= " " (sut/->spongebob-case " ")))))
 
 
 #?(:clj
    (deftest ->slug-test
      (testing "->slug can modify non-special strings"
        (is (= "charlie-brown" (sut/->slug "charlie brown")))
-       (is (= "charlie-brown" (sut/->slug "Charlie Brown"))))
+       (is (= "charlie-brown" (sut/->slug "Charlie Brown")))
+       (is (= "charlie-brown" (sut/->slug "   Charlie Brown   "))))
      (testing "->slug coerces non-ascii characters to their closest equivalent"
        (is (= "aaaaaaaaaa" (sut/->slug "áÁàÀãÃâÂäÄ")))
        (is (= "eeeeeeeeee" (sut/->slug "éÉèÈẽẼêÊëË")))
@@ -154,3 +164,27 @@
      (testing "->slug returns an identical value when called on a slug"
        (let [s (gen/generate (spec/gen ::string))]
          (is (= (sut/->slug s) (sut/->slug (sut/->slug s))))))))
+
+#_{:clj-kondo/ignore [:unresolved-symbol]}
+
+
+(check.test/defspec
+  not-blank?-type 100
+  (prop/for-all
+   [s1 generate/string]
+   (boolean? (sut/not-blank? s1))))
+
+(deftest not-blank?-test
+  (testing "not-blank? is a function from a string to a boolean"
+    (is (boolean? (sut/not-blank? (gen/generate (spec/gen ::string))))))
+  (testing "not-blank? returns true for non-blank strings"
+    (is (true? (sut/not-blank? "a")))
+    (is (true? (sut/not-blank? "a ")))
+    (is (true? (sut/not-blank? " a")))
+    (is (true? (sut/not-blank? " a "))))
+  (testing "not-blank? returns false for blank strings"
+    (is (false? (sut/not-blank? "")))
+    (is (false? (sut/not-blank? " ")))
+    (is (false? (sut/not-blank? "     ")))
+    (is (false? (sut/not-blank? "   
+                                 ")))))
