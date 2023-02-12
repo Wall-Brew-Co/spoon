@@ -2,7 +2,6 @@
                    ["Changelog" {:file "CHANGELOG.md"}]
                    ["Community" {}
                     ["Contributing" {:file "CONTRIBUTING.md"}]
-                    ["Code of Conduct" {:file "CODE_OF_CONDUCT.md"}]
-                    ["License" {:file "LICENSE"}]]
+                    ["Code of Conduct" {:file "CODE_OF_CONDUCT.md"}]]
                    ["Functionality" {}
                     ["API" {:file "API.md"}]]]}
