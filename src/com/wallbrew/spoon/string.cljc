@@ -5,6 +5,30 @@
   #?(:clj (:import [java.text Normalizer Normalizer$Form])))
 
 
+(defn not-blank?
+  "Takes a string `s` and returns false if is `s` is nil, the empty string, or contains only whitespace.
+
+   Example:
+   ```clj
+   (not-blank? \"\") ; => false
+   (not-blank? \"  \") ; => false
+   (not-blank? nil) ; => false
+   (not-blank? \"Hello, there\") ; => true
+   ```"
+  {:added    "1.2"
+   :no-doc   true
+   :see-also ["clojure.string/blank?"]}
+  [s]
+  (-> s str/blank? not))
+
+
+(def ^:const cast-to-uppercase?
+  "An option map key to cast strings to UPPER CASE in `prepare-for-compare`.
+   Commonly, this is set for the `options` argument of `same?` and `includes?`.
+   This option will be enabled if this key's value is truthy, and is disabled by default."
+  :uppercase?)
+
+
 (defn- prepare-for-compare
   "Takes a string `s`, trims it, and coerces it to lower case.
 
@@ -37,7 +61,9 @@
    (same-text? \"  Hello  \" \"goodbye\" {:uppercase? false}) ; => false
    ```"
   {:added    "1.0"
-   :see-also ["includes?" "prepare-for-compare"]}
+   :see-also ["includes?"
+              "prepare-for-compare"
+              "cast-to-uppercase?"]}
   ([s1 s2] (same-text? s1 s2 {}))
 
   ([^String s1 ^String s2 opts]
@@ -60,7 +86,9 @@
    (includes? \"  Hello  \" \"goodbye\" {:uppercase? false}) ; => false
     ```"
   {:added    "1.0"
-   :see-also ["includes?" "prepare-for-compare"]}
+   :see-also ["includes?"
+              "prepare-for-compare"
+              "cast-to-uppercase?"]}
   ([s1 s2] (includes? s1 s2 {}))
 
   ([^String s1 ^String s2 opts]
@@ -124,3 +152,5 @@
            lower-cased-s (str/lower-case asciified-s)
            split-s       (str/split (str/triml lower-cased-s) #"[\p{Space}\p{P}]+")]
        (str/join "-" split-s))))
+
+
