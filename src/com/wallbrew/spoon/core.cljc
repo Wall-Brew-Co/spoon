@@ -117,11 +117,6 @@
               "remove-by-values"
               "filter-by-values"
               "filter-by-keys"]}
-  {:added    "1.2"
-   :see-also ["clojure.core/remove"
-              "remove-by-values"
-              "filter-by-values"
-              "filter-by-keys"]}
   [pred m]
   (letfn [(reducing-fn [m k v] (if (pred k) m (assoc m k v)))]
     (reduce-kv reducing-fn {} m)))
