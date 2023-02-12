@@ -1,0 +1,19 @@
+{:version      {:major 1
+                :minor 2
+                :patch 0}
+ :version-type :semver3
+ :changes      {:added      ["A compatibility namespace to make it easier to use libraries that use functions that were added to Clojure in later versions."
+                             "An `update-vals` function that was added to Clojure in version 1.11."
+                             "An `update-keys` function that was added to Clojure in version 1.11."
+                             "A function `concatv` that concatenates into a vector, realizing the lazy results of `concat`."
+                             "A function `filter-by-values` that filters a map by values."
+                             "A function `filter-by-keys` that filters a map by keys."
+                             "A function `remove-by-values` that removes from a map by values."
+                             "A function `remove-by-keys` that removes from a map by keys."
+                             "A function `not-blank?` that checks if a string is not blank."]
+                :changed    []
+                :deprecated []
+                :removed    []
+                :fixed      ["CHANGELOG management is now handled by [sealog.](https://github.com/Wall-Brew-Co/lein-sealog)"]
+                :security   []}
+ :timestamp    "2023-02-12T20:01:18.570119400Z"}

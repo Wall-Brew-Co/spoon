@@ -1,0 +1,11 @@
+{:version      {:major 1
+                :minor 0
+                :patch 1}
+ :version-type :semver3
+ :changes      {:added      []
+                :changed    []
+                :deprecated []
+                :removed    []
+                :fixed      ["Automated deployment/version tagging."]
+                :security   []}
+ :timestamp    "2022-10-06T19:38:49.900916900Z"}

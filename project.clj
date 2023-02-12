@@ -1,17 +1,22 @@
-(defproject com.wallbrew/spoon "1.1.0"
-  :description "A collection of non-domain-specific utility functions"
+(defproject com.wallbrew/spoon "1.2.0"
+  :description "A collection of non-domain-specific utility functions."
   :url "https://github.com/Wall-Brew-Co/spoon"
   :license {:name         "MIT"
             :url          "https://opensource.org/licenses/MIT"
             :distribution :repo
-            :comments     "Same-as all Wall-Brew projects"}
+            :comments     "Same-as all Wall-Brew projects."}
   :scm {:name "git"
         :url  "https://github.com/Wall-Brew-Co/spoon"}
   :dependencies [[org.clojure/clojure "1.11.1"]
                  [org.clojure/clojurescript "1.11.60" :scope "provided"]]
-  :plugins [[lein-cljsbuild "1.1.8"]
-            [lein-project-version "0.1.0"]]
+  :plugins [[com.github.clj-kondo/lein-clj-kondo "0.2.4"]
+            [com.wallbrew/lein-sealog "1.0.2"]
+            [lein-cljsbuild "1.1.8"]
+            [lein-project-version "0.1.0"]
+            [mvxcvi/cljstyle "0.15.0"]
+            [ns-sort "1.0.3"]]
   :resource-paths ["resources"]
+  :deploy-branches ["master"]
   :deploy-repositories [["clojars" {:url           "https://clojars.org/repo"
                                     :username      :env/clojars_user
                                     :password      :env/clojars_pass

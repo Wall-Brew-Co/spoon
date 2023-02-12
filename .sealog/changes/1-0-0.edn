@@ -1,0 +1,16 @@
+{:version      {:major 1
+                :minor 0
+                :patch 0}
+ :version-type :semver3
+ :changes      {:added      ["A multi-binding form of `when-let` called `when-let+`."
+                             "A test-utility form of `clojure.spec.alpha/valid?` called `test-valid?`."
+                             "A string \"equality\" algorithm for similar strings named `same-text?`."
+                             "A substring \"equality\" algorithm for similar strings named `includes?`."
+                             "A variadic string casing function named `->sporadic-case`."
+                             "A variadic string casing function named `->spongebob-case`."]
+                :changed    []
+                :deprecated []
+                :removed    []
+                :fixed      []
+                :security   []}
+ :timestamp    "2022-10-06T19:37:02.284041600Z"}
