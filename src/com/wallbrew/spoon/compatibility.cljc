@@ -11,7 +11,7 @@
    A version of this function was added to `clojure.core` in release 1.11;
      however, many libraries included this function either in their API or their implementation.
    This leads consumers to continually receive warnings about shadowed functionality;
-     however, libraries cannot leverage the version in `clojure.core` without breaking compatability for consumers using older versions of clojure.
+     however, libraries cannot leverage the version in `clojure.core` without breaking compatibility for consumers using older versions of clojure.
    
    Example:
    ```clj
@@ -31,7 +31,7 @@
    A version of this function was added to `clojure.core` in release 1.11;
      however, many libraries included this function either in their API or their implementation.
    This leads consumers to continually receive warnings about shadowed functionality;
-     however, libraries cannot leverage the version in `clojure.core` without breaking compatability for consumers using older versions of clojure.
+     however, libraries cannot leverage the version in `clojure.core` without breaking compatibility for consumers using older versions of clojure.
    
    Example:
    ```clj

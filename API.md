@@ -1,5 +1,13 @@
 # Table of contents
+-  [`com.wallbrew.spoon.compatibility`](#com.wallbrew.spoon.compatibility)  - Functions that provide compatibility with older versions of Clojure.
+    -  [`update-keys`](#com.wallbrew.spoon.compatibility/update-keys) - Return <code>m</code> with <code>f</code> applied to each key in <code>m</code> with its <code>args</code>.
+    -  [`update-vals`](#com.wallbrew.spoon.compatibility/update-vals) - Return <code>m</code> with <code>f</code> applied to each val in <code>m</code> with its <code>args</code>.
 -  [`com.wallbrew.spoon.core`](#com.wallbrew.spoon.core)  - General purpose utility functions.
+    -  [`concatv`](#com.wallbrew.spoon.core/concatv) - Concatenates the given sequences together into a vector.
+    -  [`filter-by-keys`](#com.wallbrew.spoon.core/filter-by-keys) - Return <code>m</code> with only the key:value pairs whose keys cause <code>pred</code> to evaluate truthily.
+    -  [`filter-by-values`](#com.wallbrew.spoon.core/filter-by-values) - Return <code>m</code> with only the key:value pairs whose values cause <code>pred</code> to evaluate truthily.
+    -  [`remove-by-keys`](#com.wallbrew.spoon.core/remove-by-keys) - Return <code>m</code> with only the key:value pairs whose keys cause <code>pred</code> to evaluate falsily.
+    -  [`remove-by-values`](#com.wallbrew.spoon.core/remove-by-values) - Return <code>m</code> with only the key:value pairs whose values cause <code>pred</code> to evaluate falsily.
     -  [`when-let+`](#com.wallbrew.spoon.core/when-let+) - A multiple bindings version of <code>clojure.core/when-let</code>.
 -  [`com.wallbrew.spoon.spec`](#com.wallbrew.spoon.spec)  - Fuctions used in conjunction with <code>clojure.spec.alpha</code>.
     -  [`test-valid?`](#com.wallbrew.spoon.spec/test-valid?) - Tests if <code>value</code> is a valid instance of <code>spec</code>.
@@ -7,8 +15,62 @@
     -  [`->slug`](#com.wallbrew.spoon.string/->slug) - Take a string <code>s</code> and return a [slug-ified](https://en.wikipedia.org/wiki/Clean_URL#Slug) string.
     -  [`->spongebob-case`](#com.wallbrew.spoon.string/->spongebob-case) - Take a string <code>s</code> and coerce characters alternatively between lower and upper case.
     -  [`->sporadic-case`](#com.wallbrew.spoon.string/->sporadic-case) - Take a string <code>s</code> and randomly coerce characters to either lower or upper case.
+    -  [`cast-to-uppercase?`](#com.wallbrew.spoon.string/cast-to-uppercase?) - An option map key to cast strings to UPPER CASE in <code>prepare-for-compare</code>.
     -  [`includes?`](#com.wallbrew.spoon.string/includes?) - Checks to see if <code>s1</code> includes <code>s2</code> after each string has been modified by <code>prepare-for-compare</code>.
     -  [`same-text?`](#com.wallbrew.spoon.string/same-text?) - Checks to see if <code>s1</code> and <code>s2</code> are equal after each string has been <code>trim</code>ed and cast to the same casing.
+
+-----
+# <a name="com.wallbrew.spoon.compatibility">com.wallbrew.spoon.compatibility</a>
+
+
+Functions that provide compatibility with older versions of Clojure.
+
+   This allows libraries to be used in projects that are not yet on the latest version of Clojure.
+
+
+
+
+## <a name="com.wallbrew.spoon.compatibility/update-keys">`update-keys`</a> [:page_facing_up:](null)
+<a name="com.wallbrew.spoon.compatibility/update-keys"></a>
+``` clojure
+
+(update-keys m f & args)
+```
+
+
+Return `m` with `f` applied to each key in `m` with its `args`.
+   A version of this function was added to `clojure.core` in release 1.11;
+     however, many libraries included this function either in their API or their implementation.
+   This leads consumers to continually receive warnings about shadowed functionality;
+     however, libraries cannot leverage the version in `clojure.core` without breaking compatibility for consumers using older versions of clojure.
+   
+   Example:
+   ```clj
+   (update-keys* {:a 2 :b 3} name) ; => {"a" 2 "b" 3}
+   (update-keys* {} dec) ; => {}
+   (update-keys* {:b 3 :c 4} str "-key") ; => {":b-key" 3 ":c-key" 4}
+   ```
+
+## <a name="com.wallbrew.spoon.compatibility/update-vals">`update-vals`</a> [:page_facing_up:](null)
+<a name="com.wallbrew.spoon.compatibility/update-vals"></a>
+``` clojure
+
+(update-vals m f & args)
+```
+
+
+Return `m` with `f` applied to each val in `m` with its `args`.
+   A version of this function was added to `clojure.core` in release 1.11;
+     however, many libraries included this function either in their API or their implementation.
+   This leads consumers to continually receive warnings about shadowed functionality;
+     however, libraries cannot leverage the version in `clojure.core` without breaking compatibility for consumers using older versions of clojure.
+   
+   Example:
+   ```clj
+   (update-vals* {:a 1 :b 2} inc) ; => {:a 2 :b 3}
+   (update-vals* {} dec) ; => {}
+   (update-vals* {:b 1 :c 2} + 2) ; => {:b 3 :c 4}
+   ```
 
 -----
 # <a name="com.wallbrew.spoon.core">com.wallbrew.spoon.core</a>
@@ -18,6 +80,87 @@ General purpose utility functions.
 
 
 
+
+## <a name="com.wallbrew.spoon.core/concatv">`concatv`</a> [:page_facing_up:](null)
+<a name="com.wallbrew.spoon.core/concatv"></a>
+``` clojure
+
+(concatv & vectors)
+```
+
+
+Concatenates the given sequences together into a vector.
+   Provided as an alternative to `concat`, when a lazy sequence would be inappropriate.
+
+   Example:
+   ```clj
+   (concatv [1 2] [3 4]) ; => [1 2 3 4]
+   (concat [1] [2] '(3 4) [5 6 7] #{9 10 8}) ; => (1 2 3 4 5 6 7 8 9 10)
+   ```
+
+## <a name="com.wallbrew.spoon.core/filter-by-keys">`filter-by-keys`</a> [:page_facing_up:](null)
+<a name="com.wallbrew.spoon.core/filter-by-keys"></a>
+``` clojure
+
+(filter-by-keys pred m)
+```
+
+
+Return `m` with only the key:value pairs whose keys cause `pred` to evaluate truthily.
+   
+   Example:
+   ```clj
+   (filter-by-keys nil? {}) ; => {}
+   (filter-by-keys keyword? {:a 2 "b" 1 :c 4 :d 6 "e" 7}) ; => {:a 2 :c 4 :d 6}
+   ```
+
+## <a name="com.wallbrew.spoon.core/filter-by-values">`filter-by-values`</a> [:page_facing_up:](null)
+<a name="com.wallbrew.spoon.core/filter-by-values"></a>
+``` clojure
+
+(filter-by-values pred m)
+```
+
+
+Return `m` with only the key:value pairs whose values cause `pred` to evaluate truthily.
+   
+   Example:
+   ```clj
+   (filter-by-values nil? {}) ; => {}
+   (filter-by-values even? {:a 2 :b 1 :c 4 :d 6 :e 7}) ; => {:a 2 :c 4 :d 6}
+   ```
+
+## <a name="com.wallbrew.spoon.core/remove-by-keys">`remove-by-keys`</a> [:page_facing_up:](null)
+<a name="com.wallbrew.spoon.core/remove-by-keys"></a>
+``` clojure
+
+(remove-by-keys pred m)
+```
+
+
+Return `m` with only the key:value pairs whose keys cause `pred` to evaluate falsily.
+   
+   Example:
+   ```clj
+   (remove-by-keys nil? {}) ; => {}
+   (remove-by-keys keyword? {:a 2 "b" 1 :c 4 :d 6 "e" 7}) ; => {"b" 1 "e" 7}
+   ```
+
+## <a name="com.wallbrew.spoon.core/remove-by-values">`remove-by-values`</a> [:page_facing_up:](null)
+<a name="com.wallbrew.spoon.core/remove-by-values"></a>
+``` clojure
+
+(remove-by-values pred m)
+```
+
+
+Return `m` with only the key:value pairs whose values cause `pred` to evaluate falsily.
+   
+   Example:
+   ```clj
+   (remove-by-values nil? {}) ; => {}
+   (remove-by-values even? {:a 2 :b 1 :c 4 :d 6 :e 7}) ; => {:b 1 :e 7}
+   ```
 
 ## <a name="com.wallbrew.spoon.core/when-let+">`when-let+`</a> [:page_facing_up:](null)
 <a name="com.wallbrew.spoon.core/when-let+"></a>
@@ -132,6 +275,13 @@ Take a string `s` and randomly coerce characters to either lower or upper case.
    (->sporadic-case "hello world") ;; => "hElLo wOrLd"
    (->sporadic-case "hello world") ;; => "hElLo world"
    ```
+
+## <a name="com.wallbrew.spoon.string/cast-to-uppercase?">`cast-to-uppercase?`</a> [:page_facing_up:](null)
+<a name="com.wallbrew.spoon.string/cast-to-uppercase?"></a>
+
+An option map key to cast strings to UPPER CASE in [`prepare-for-compare`](#com.wallbrew.spoon.string/prepare-for-compare).
+   Commonly, this is set for the `options` argument of `same?` and [`includes?`](#com.wallbrew.spoon.string/includes?).
+   This option will be enabled if this key's value is truthy, and is disabled by default.
 
 ## <a name="com.wallbrew.spoon.string/includes?">`includes?`</a> [:page_facing_up:](null)
 <a name="com.wallbrew.spoon.string/includes?"></a>

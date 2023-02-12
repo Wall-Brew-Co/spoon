@@ -51,7 +51,13 @@
 ;; Hash Maps
 
 (defn filter-by-values
-  "Return `m` with only the key:value pairs whose values cause `pred` to evaluate truthily."
+  "Return `m` with only the key:value pairs whose values cause `pred` to evaluate truthily.
+   
+   Example:
+   ```clj
+   (filter-by-values nil? {}) ; => {}
+   (filter-by-values even? {:a 2 :b 1 :c 4 :d 6 :e 7}) ; => {:a 2 :c 4 :d 6}
+   ```"
   {:added    "1.2"
    :see-also ["clojure.core/filter"
               "filter-by-keys"
@@ -63,7 +69,13 @@
 
 
 (defn filter-by-keys
-  "Return `m` with only the key:value pairs whose keys cause `pred` to evaluate truthily."
+  "Return `m` with only the key:value pairs whose keys cause `pred` to evaluate truthily.
+   
+   Example:
+   ```clj
+   (filter-by-keys nil? {}) ; => {}
+   (filter-by-keys keyword? {:a 2 \"b\" 1 :c 4 :d 6 \"e\" 7}) ; => {:a 2 :c 4 :d 6}
+   ```"
   {:added    "1.2"
    :see-also ["clojure.core/filter"
               "filter-by-values"
@@ -75,7 +87,13 @@
 
 
 (defn remove-by-values
-  "Return `m` with only the key:value pairs whose values cause `pred` to evaluate falsily."
+  "Return `m` with only the key:value pairs whose values cause `pred` to evaluate falsily.
+   
+   Example:
+   ```clj
+   (remove-by-values nil? {}) ; => {}
+   (remove-by-values even? {:a 2 :b 1 :c 4 :d 6 :e 7}) ; => {:b 1 :e 7}
+   ```"
   {:added    "1.2"
    :see-also ["clojure.core/remove"
               "remove-by-keys"
@@ -87,7 +105,18 @@
 
 
 (defn remove-by-keys
-  "Return `m` with only the key:value pairs whose keys cause `pred` to evaluate falsily."
+  "Return `m` with only the key:value pairs whose keys cause `pred` to evaluate falsily.
+   
+   Example:
+   ```clj
+   (remove-by-keys nil? {}) ; => {}
+   (remove-by-keys keyword? {:a 2 \"b\" 1 :c 4 :d 6 \"e\" 7}) ; => {\"b\" 1 \"e\" 7}
+   ```"
+  {:added    "1.2"
+   :see-also ["clojure.core/remove"
+              "remove-by-values"
+              "filter-by-values"
+              "filter-by-keys"]}
   {:added    "1.2"
    :see-also ["clojure.core/remove"
               "remove-by-values"

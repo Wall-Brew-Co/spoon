@@ -6,9 +6,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## Table of Contents
 
+* [1.2.0 - 2023-02-12](#120---2023-02-12)
 * [1.1.0 - 2022-11-14](#110---2022-11-14)
 * [1.0.1 - 2022-10-06](#101---2022-10-06)
 * [1.0.0 - 2022-10-06](#100---2022-10-06)
+
+## 1.2.0 - 2023-02-12
+
+* Added
+  * A compatibility namespace to make it easier to use libraries that use functions that were added to Clojure in later versions.
+  * An `update-vals` function that was added to Clojure in version 1.11.
+  * An `update-keys` function that was added to Clojure in version 1.11.
+  * A function `concatv` that concatenates into a vector, realizing the lazy results of `concat`.
+  * A function `filter-by-values` that filters a map by values.
+  * A function `filter-by-keys` that filters a map by keys.
+  * A function `remove-by-values` that removes from a map by values.
+  * A function `remove-by-keys` that removes from a map by keys.
+  * A function `not-blank?` that checks if a string is not blank.
+* Fixed
+  * CHANGELOG management is now handled by [sealog.](https://github.com/Wall-Brew-Co/lein-sealog)
 
 ## 1.1.0 - 2022-11-14
 
