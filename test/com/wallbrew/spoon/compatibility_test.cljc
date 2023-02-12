@@ -2,6 +2,7 @@
   (:require [clojure.test :refer [deftest is testing]]
             [com.wallbrew.spoon.compatibility :as sut]))
 
+
 (deftest update-vals-test
   (testing "Functional correctness"
     (is (= {:a 2 :b 3} (sut/update-vals {:a 1 :b 2} inc)))

@@ -165,14 +165,16 @@
        (let [s (gen/generate (spec/gen ::string))]
          (is (= (sut/->slug s) (sut/->slug (sut/->slug s))))))))
 
+
 #_{:clj-kondo/ignore [:unresolved-symbol]}
 
 
 (check.test/defspec
   not-blank?-type 100
   (prop/for-all
-   [s1 generate/string]
-   (boolean? (sut/not-blank? s1))))
+    [s1 generate/string]
+    (boolean? (sut/not-blank? s1))))
+
 
 (deftest not-blank?-test
   (testing "not-blank? is a function from a string to a boolean"
