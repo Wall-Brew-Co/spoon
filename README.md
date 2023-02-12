@@ -29,6 +29,6 @@ See the [API docs](https://github.com/Wall-Brew-Co/spoon/blob/master/API.md) gen
 
 ## License
 
-Copyright © 2022 - [Wall Brew Co](https://wallbrew.com/)
+Copyright © 2022-2023 - [Wall Brew Co](https://wallbrew.com/)
 
 This software is provided for free, public use as outlined in the [MIT License](https://github.com/Wall-Brew-Co/spoon/blob/master/LICENSE)
