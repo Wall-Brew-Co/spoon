@@ -20,7 +20,7 @@
     <url>https://github.com/Wall-Brew-Co/spoon</url>
     <connection>scm:git:git://github.com/Wall-Brew-Co/spoon.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/Wall-Brew-Co/spoon.git</developerConnection>
-    <tag>3615a3e3bcec009d32fc37976b5af18203d4f2b8</tag>
+    <tag>68bc430a1193eb48f13f94e44c8a672a6e73afca</tag>
   </scm>
   <build>
     <sourceDirectory>src</sourceDirectory>
