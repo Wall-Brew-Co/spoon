@@ -20,7 +20,9 @@
     (is (nil? (sut/when-let+ [a (get {:c nil} :c) b 2] (+ a b)))
         "when-let+ can bind multiple values. When any bound value evaluates to nil, the body is not evaluated and nil is returned"))
   (testing "when-let+ implements vacuous truthiness in its bidnings. This is the same behavior as `let`"
-    (is (= :empty (sut/when-let+ [] :empty)))))
+    (is (= :empty
+           (sut/when-let+ [] :empty)
+           (let [] :empty)))))
 
 
 (deftest concatv-test

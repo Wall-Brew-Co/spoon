@@ -16,7 +16,6 @@
    (not-blank? \"Hello, there\") ; => true
    ```"
   {:added    "1.2"
-   :no-doc   true
    :see-also ["clojure.string/blank?"]}
   [s]
   (-> s str/blank? not))
@@ -53,7 +52,7 @@
      The following keys are supported:
 
    - `:uppercase?` - If true, `s1` and `s2` will be coerced to upper case. Defaults to false.
-   
+
    Example:
    ```clj
    (same-text? \"  Hello  \" \"hello\") ; => true
@@ -78,7 +77,7 @@
      The following keys are supported:
 
    - `:uppercase?` - If true, `s1` and `s2` will be coerced to upper case. Defaults to false.
-   
+
    Example:
    ```clj
    (includes? \"  Hello  \" \"hello\") ; => true
@@ -139,9 +138,9 @@
 #?(:clj
    (defn ->slug
      "Take a string `s` and return a [slug-ified](https://en.wikipedia.org/wiki/Clean_URL#Slug) string.
-   
+
      For example:
-   
+
      ```clj
        (->slug \"Nick's recipe\" \"nicks-recipe\")
      ```"

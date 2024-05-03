@@ -17,6 +17,7 @@
     -  [`->sporadic-case`](#com.wallbrew.spoon.string/->sporadic-case) - Take a string <code>s</code> and randomly coerce characters to either lower or upper case.
     -  [`cast-to-uppercase?`](#com.wallbrew.spoon.string/cast-to-uppercase?) - An option map key to cast strings to UPPER CASE in <code>prepare-for-compare</code>.
     -  [`includes?`](#com.wallbrew.spoon.string/includes?) - Checks to see if <code>s1</code> includes <code>s2</code> after each string has been modified by <code>prepare-for-compare</code>.
+    -  [`not-blank?`](#com.wallbrew.spoon.string/not-blank?) - Takes a string <code>s</code> and returns false if is <code>s</code> is nil, the empty string, or contains only whitespace.
     -  [`same-text?`](#com.wallbrew.spoon.string/same-text?) - Checks to see if <code>s1</code> and <code>s2</code> are equal after each string has been <code>trim</code>ed and cast to the same casing.
 
 -----
@@ -236,9 +237,9 @@ Functions for working with strings.
 
 
 Take a string `s` and return a [slug-ified](https://en.wikipedia.org/wiki/Clean_URL#Slug) string.
-   
+
      For example:
-   
+
      ```clj
        (->slug "Nick's recipe" "nicks-recipe")
      ```
@@ -298,13 +299,31 @@ Checks to see if `s1` includes `s2` after each string has been modified by [`pre
      The following keys are supported:
 
    - `:uppercase?` - If true, `s1` and `s2` will be coerced to upper case. Defaults to false.
-   
+
    Example:
    ```clj
    (includes? "  Hello  " "hello") ; => true
    (includes? "  Hello there " "hello" {:uppercase? true}) ; => true
    (includes? "  Hello  " "goodbye" {:uppercase? false}) ; => false
     ```
+
+## <a name="com.wallbrew.spoon.string/not-blank?">`not-blank?`</a> [:page_facing_up:](null)
+<a name="com.wallbrew.spoon.string/not-blank?"></a>
+``` clojure
+
+(not-blank? s)
+```
+
+
+Takes a string `s` and returns false if is `s` is nil, the empty string, or contains only whitespace.
+
+   Example:
+   ```clj
+   (not-blank? "") ; => false
+   (not-blank? "  ") ; => false
+   (not-blank? nil) ; => false
+   (not-blank? "Hello, there") ; => true
+   ```
 
 ## <a name="com.wallbrew.spoon.string/same-text?">`same-text?`</a> [:page_facing_up:](null)
 <a name="com.wallbrew.spoon.string/same-text?"></a>
@@ -321,7 +340,7 @@ Checks to see if `s1` and `s2` are equal after each string has been `trim`ed and
      The following keys are supported:
 
    - `:uppercase?` - If true, `s1` and `s2` will be coerced to upper case. Defaults to false.
-   
+
    Example:
    ```clj
    (same-text? "  Hello  " "hello") ; => true
