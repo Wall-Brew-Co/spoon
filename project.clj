@@ -1,4 +1,4 @@
-(defproject com.wallbrew/spoon "1.2.2"
+(defproject com.wallbrew/spoon "1.2.3"
   :description "A collection of non-domain-specific utility functions."
   :url "https://github.com/Wall-Brew-Co/spoon"
   :license {:name         "MIT"

@@ -1,0 +1,11 @@
+{:version      {:major 1
+                :minor 2
+                :patch 3}
+ :version-type :semver3
+ :changes      {:added      []
+                :changed    []
+                :deprecated []
+                :removed    []
+                :fixed      ["Removed `no-doc` metadata on `com.wallbrew.spoon.string/not-blank?` to make sure it appears in documentation."]
+                :security   []}
+ :timestamp    "2024-05-03T12:46:08.699427300Z"}
