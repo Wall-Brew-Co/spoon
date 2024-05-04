@@ -25,9 +25,13 @@ jobs:
             ${{ runner.os }}-clj
 
     - name: Install Clojure dependencies
-      run: |
-        lein deps
-        lein sealog version project.clj | tail -n 1
+      run: lein deps
+
+    - name: Validate Changelog Status
+      run: lein sealog check
+
+    - name: Display Version
+      run: lein sealog version
 
     - name: Run sanity tests
       run: lein test
