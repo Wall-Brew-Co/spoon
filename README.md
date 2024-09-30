@@ -20,6 +20,11 @@ To use it, add the following as a dependency in your project.clj file:
 The next time you build your application, [Leiningen](https://leiningen.org/) or [deps.edn](https://clojure.org/guides/deps_and_cli) should pull it automatically.
 Alternatively, you may clone or fork the repository to work with it directly.
 
+### Clojure Version Compatibility
+
+Spoon runs its test suite in a matrix, replacing the clojure version with multiple previous versions of the language.
+If your project is not running the most recent version of clojure, please consult the most recent compatibility testing results in the [CI/CD pipeline](https://github.com/Wall-Brew-Co/spoon/actions/workflows/compatibility.yml).
+
 ## Usage
 
 Functions in spoon are organized by the Clojure library or data structure they are intended to work with.
@@ -29,6 +34,6 @@ See the [API docs](https://github.com/Wall-Brew-Co/spoon/blob/master/API.md) gen
 
 ## License
 
-Copyright © 2022-2023 - [Wall Brew Co](https://wallbrew.com/)
+Copyright © [Wall Brew Co](https://wallbrew.com/)
 
 This software is provided for free, public use as outlined in the [MIT License](https://github.com/Wall-Brew-Co/spoon/blob/master/LICENSE)
