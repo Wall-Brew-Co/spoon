@@ -9,7 +9,7 @@ jobs:
         clojure_version: ['1.10.0', '1.11.0', '1.12.0']
 
     concurrency:
-      group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+      group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}-${{ matrix.clojure_version }}
       cancel-in-progress: true
 
     runs-on: ubuntu-latest
