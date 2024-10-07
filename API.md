@@ -19,6 +19,9 @@
     -  [`includes?`](#com.wallbrew.spoon.string/includes?) - Checks to see if <code>s1</code> includes <code>s2</code> after each string has been modified by <code>prepare-for-compare</code>.
     -  [`not-blank?`](#com.wallbrew.spoon.string/not-blank?) - Takes a string <code>s</code> and returns false if is <code>s</code> is nil, the empty string, or contains only whitespace.
     -  [`same-text?`](#com.wallbrew.spoon.string/same-text?) - Checks to see if <code>s1</code> and <code>s2</code> are equal after each string has been <code>trim</code>ed and cast to the same casing.
+-  [`com.wallbrew.spoon.version`](#com.wallbrew.spoon.version)  - Tools to inspect and compare Clojure versions.
+    -  [`->printable-clojure-version`](#com.wallbrew.spoon.version/->printable-clojure-version) - Returns clojure version as a printable string.
+    -  [`assert-minimum-clojure-version!`](#com.wallbrew.spoon.version/assert-minimum-clojure-version!) - Assert that the current version of Clojure is at least <code>min-version</code>.
 
 -----
 # <a name="com.wallbrew.spoon.compatibility">com.wallbrew.spoon.compatibility</a>
@@ -44,7 +47,7 @@ Return `m` with `f` applied to each key in `m` with its `args`.
      however, many libraries included this function either in their API or their implementation.
    This leads consumers to continually receive warnings about shadowed functionality;
      however, libraries cannot leverage the version in `clojure.core` without breaking compatibility for consumers using older versions of clojure.
-   
+
    Example:
    ```clj
    (update-keys* {:a 2 :b 3} name) ; => {"a" 2 "b" 3}
@@ -65,7 +68,7 @@ Return `m` with `f` applied to each val in `m` with its `args`.
      however, many libraries included this function either in their API or their implementation.
    This leads consumers to continually receive warnings about shadowed functionality;
      however, libraries cannot leverage the version in `clojure.core` without breaking compatibility for consumers using older versions of clojure.
-   
+
    Example:
    ```clj
    (update-vals* {:a 1 :b 2} inc) ; => {:a 2 :b 3}
@@ -108,7 +111,7 @@ Concatenates the given sequences together into a vector.
 
 
 Return `m` with only the key:value pairs whose keys cause `pred` to evaluate truthily.
-   
+
    Example:
    ```clj
    (filter-by-keys nil? {}) ; => {}
@@ -124,7 +127,7 @@ Return `m` with only the key:value pairs whose keys cause `pred` to evaluate tru
 
 
 Return `m` with only the key:value pairs whose values cause `pred` to evaluate truthily.
-   
+
    Example:
    ```clj
    (filter-by-values nil? {}) ; => {}
@@ -140,7 +143,7 @@ Return `m` with only the key:value pairs whose values cause `pred` to evaluate t
 
 
 Return `m` with only the key:value pairs whose keys cause `pred` to evaluate falsily.
-   
+
    Example:
    ```clj
    (remove-by-keys nil? {}) ; => {}
@@ -156,7 +159,7 @@ Return `m` with only the key:value pairs whose keys cause `pred` to evaluate fal
 
 
 Return `m` with only the key:value pairs whose values cause `pred` to evaluate falsily.
-   
+
    Example:
    ```clj
    (remove-by-values nil? {}) ; => {}
@@ -178,14 +181,15 @@ A multiple bindings version of `clojure.core/when-let`.
    If all bindings evaluate truthy, the body will be evaluated in an implicit `do` in which all bindings are bound to the value of their test.
    If any binding evaluates falsey, the body will not be evaluated and nil will be returned.
    If multiple forms are provided, the last form will be returned.
-   
+   If the bindings vector contains an invalid number of forms, an assertion error will be thrown.
+
    Example:
    ```clj
-   (when-let+ 
+   (when-let+
      [a 1 b 2]
      (+ a b)) ; => 3
 
-   (when-let+ 
+   (when-let+
      [a nil b 2]
      (+ a b)) ; => nil
    ```
@@ -347,3 +351,55 @@ Checks to see if `s1` and `s2` are equal after each string has been `trim`ed and
    (same-text? "  Hello  " "hello" {:uppercase? true}) ; => true
    (same-text? "  Hello  " "goodbye" {:uppercase? false}) ; => false
    ```
+
+-----
+# <a name="com.wallbrew.spoon.version">com.wallbrew.spoon.version</a>
+
+
+Tools to inspect and compare Clojure versions.
+
+
+
+
+## <a name="com.wallbrew.spoon.version/->printable-clojure-version">`->printable-clojure-version`</a> [:page_facing_up:](null)
+<a name="com.wallbrew.spoon.version/->printable-clojure-version"></a>
+``` clojure
+
+(->printable-clojure-version {:keys [major minor incremental qualifier interim], :as _version})
+```
+
+
+Returns clojure version as a printable string.
+
+   For example:
+   ```clj
+   (->printable-clojure-version {:major 1 :minor 12 :incremental 0 :qualifier nil}) ; => "1.12.0"
+   (->printable-clojure-version {:major 1 :minor 12 :incremental 0 :qualifier "alpha"}) ; => "1.12.0-alpha"
+   (->printable-clojure-version {:major 1 :minor 12 :incremental 0 :qualifier "alpha" :interim 1}) ; => "1.12.0-alpha-SNAPSHOT"
+   ```
+
+## <a name="com.wallbrew.spoon.version/assert-minimum-clojure-version!">`assert-minimum-clojure-version!`</a> [:page_facing_up:](null)
+<a name="com.wallbrew.spoon.version/assert-minimum-clojure-version!"></a>
+``` clojure
+
+(assert-minimum-clojure-version! {:keys [major minor incremental qualifier], :as min-version})
+```
+
+
+Assert that the current version of Clojure is at least `min-version`.
+   If the versions are incompatible, it throws an assertion error with a message indicating the incompatibility.
+   If the versions are, or may be compatible, it returns a keyword indicating the compatibility level:
+
+     - `:safe` - The Semantic Versions of the current and minimum versions are compatible.
+     - `:warn` - The Semantic Versions of the current and minimum versions may be incompatible.
+                 For example, a major version bump in the language version may introduce breaking changes in the API.
+                 However, the current version may still be compatible with the minimum version.
+
+   `min-version` should be a map with the same structure as the dynamic var `clojure-version`.
+   For example, the dependency `[org.clojure/clojure "1.12.0"]` would translate to:
+   ```clj
+   *clojure-version*
+    ; => {:major 1, :minor 12, :incremental 0, :qualifier nil}
+   ```
+
+   This function is useful for libraries that require a minimum version of Clojure to function properly.

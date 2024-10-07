@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## Table of Contents
 
+* [1.4.0 - 2024-10-07](#140---2024-10-07)
 * [1.3.0 - 2024-09-21](#130---2024-09-21)
 * [1.2.3 - 2024-05-03](#123---2024-05-03)
 * [1.2.2 - 2024-03-10](#122---2024-03-10)
@@ -14,6 +15,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 * [1.1.0 - 2022-11-14](#110---2022-11-14)
 * [1.0.1 - 2022-10-06](#101---2022-10-06)
 * [1.0.0 - 2022-10-06](#100---2022-10-06)
+
+## 1.4.0 - 2024-10-07
+
+* Added
+  * `sealog.version` namespace with functions for working with Clojure versions.
+* Changed
+  * `sealog.core/when-let+` throws a more specific exception when the bindings vector contains an odd number of forms.
 
 ## 1.3.0 - 2024-09-21
 
