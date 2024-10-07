@@ -1,3 +1,4 @@
+.PHONY: version/major version/minor version/patch changelog/render
 
 MAKE = make
 
