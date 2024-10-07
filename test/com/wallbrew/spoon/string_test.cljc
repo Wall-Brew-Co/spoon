@@ -191,30 +191,35 @@
     (is (false? (sut/not-blank? "
                                  ")))))
 
+
 #_{:clj-kondo/ignore [:unresolved-symbol]}
 
 
 (check.test/defspec
   prepare-for-compare-type-no-map 100
   (prop/for-all
-   [s1 generate/string]
-   (string? (sut/prepare-for-compare s1))))
+    [s1 generate/string]
+    (string? (sut/prepare-for-compare s1))))
+
 
 #_{:clj-kondo/ignore [:unresolved-symbol]}
+
 
 (check.test/defspec
   prepare-for-compare-type-false-map 100
   (prop/for-all
-   [s1 generate/string]
-   (string? (sut/prepare-for-compare s1 {sut/cast-to-uppercase? false}))))
+    [s1 generate/string]
+    (string? (sut/prepare-for-compare s1 {sut/cast-to-uppercase? false}))))
+
 
 #_{:clj-kondo/ignore [:unresolved-symbol]}
+
 
 (check.test/defspec
   prepare-for-compare-type-true-map 100
   (prop/for-all
-   [s1 generate/string]
-   (string? (sut/prepare-for-compare s1 {sut/cast-to-uppercase? true}))))
+    [s1 generate/string]
+    (string? (sut/prepare-for-compare s1 {sut/cast-to-uppercase? true}))))
 
 
 (deftest prepare-for-compare-test
@@ -234,10 +239,10 @@
            (sut/prepare-for-compare "aaa   " {sut/cast-to-uppercase? false})
            (sut/prepare-for-compare "   aaa" {sut/cast-to-uppercase? false})))
     (is (= "AAA"
-            (sut/prepare-for-compare "   AAA   " {sut/cast-to-uppercase? true})
-            (sut/prepare-for-compare "AAA" {sut/cast-to-uppercase? true})
-            (sut/prepare-for-compare "AAA   " {sut/cast-to-uppercase? true})
-            (sut/prepare-for-compare "   AAA" {sut/cast-to-uppercase? true}))))
+           (sut/prepare-for-compare "   AAA   " {sut/cast-to-uppercase? true})
+           (sut/prepare-for-compare "AAA" {sut/cast-to-uppercase? true})
+           (sut/prepare-for-compare "AAA   " {sut/cast-to-uppercase? true})
+           (sut/prepare-for-compare "   AAA" {sut/cast-to-uppercase? true}))))
   (testing "prepare-for-compare coerces strings to lower case by default"
     (is (= "aaa"
            (sut/prepare-for-compare "AaA")
