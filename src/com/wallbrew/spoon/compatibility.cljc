@@ -12,7 +12,7 @@
      however, many libraries included this function either in their API or their implementation.
    This leads consumers to continually receive warnings about shadowed functionality;
      however, libraries cannot leverage the version in `clojure.core` without breaking compatibility for consumers using older versions of clojure.
-   
+
    Example:
    ```clj
    (update-vals* {:a 1 :b 2} inc) ; => {:a 2 :b 3}
@@ -32,7 +32,7 @@
      however, many libraries included this function either in their API or their implementation.
    This leads consumers to continually receive warnings about shadowed functionality;
      however, libraries cannot leverage the version in `clojure.core` without breaking compatibility for consumers using older versions of clojure.
-   
+
    Example:
    ```clj
    (update-keys* {:a 2 :b 3} name) ; => {\"a\" 2 \"b\" 3}
@@ -44,3 +44,5 @@
               "update-vals"]}
   [m f & args]
   (reduce-kv (fn [m' k v] (assoc m' (apply f k args) v)) {} m))
+
+

@@ -10,21 +10,24 @@
    If all bindings evaluate truthy, the body will be evaluated in an implicit `do` in which all bindings are bound to the value of their test.
    If any binding evaluates falsey, the body will not be evaluated and nil will be returned.
    If multiple forms are provided, the last form will be returned.
-   
+   If the bindings vector contains an invalid number of forms, an assertion error will be thrown.
+
    Example:
    ```clj
-   (when-let+ 
+   (when-let+
      [a 1 b 2]
      (+ a b)) ; => 3
 
-   (when-let+ 
+   (when-let+
      [a nil b 2]
      (+ a b)) ; => nil
    ```"
   {:added    "1.0"
+   :changed  "1.4"
    :see-also ["clojure.core/when-let"]}
   [bindings & body]
-  (assert (even? (count bindings)))
+  (assert (even? (count bindings))
+          "`when-let+` requires an even number of forms in the bindings vector.")
   (if (seq bindings)
     `(when-let [~(first bindings) ~(second bindings)]
        (when-let+ ~(vec (drop 2 bindings)) ~@body))
@@ -52,7 +55,7 @@
 
 (defn filter-by-values
   "Return `m` with only the key:value pairs whose values cause `pred` to evaluate truthily.
-   
+
    Example:
    ```clj
    (filter-by-values nil? {}) ; => {}
@@ -70,7 +73,7 @@
 
 (defn filter-by-keys
   "Return `m` with only the key:value pairs whose keys cause `pred` to evaluate truthily.
-   
+
    Example:
    ```clj
    (filter-by-keys nil? {}) ; => {}
@@ -88,7 +91,7 @@
 
 (defn remove-by-values
   "Return `m` with only the key:value pairs whose values cause `pred` to evaluate falsily.
-   
+
    Example:
    ```clj
    (remove-by-values nil? {}) ; => {}
@@ -106,7 +109,7 @@
 
 (defn remove-by-keys
   "Return `m` with only the key:value pairs whose keys cause `pred` to evaluate falsily.
-   
+
    Example:
    ```clj
    (remove-by-keys nil? {}) ; => {}

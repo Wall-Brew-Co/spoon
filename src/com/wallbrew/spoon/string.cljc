@@ -28,7 +28,7 @@
   :uppercase?)
 
 
-(defn- prepare-for-compare
+(defn prepare-for-compare
   "Takes a string `s`, trims it, and coerces it to lower case.
 
    An option map may be passed as an optional second argument.
