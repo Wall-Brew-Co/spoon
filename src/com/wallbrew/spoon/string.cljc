@@ -1,8 +1,7 @@
 (ns com.wallbrew.spoon.string
   "Functions for working with strings."
   {:added "1.0"}
-  (:require [clojure.string :as str])
-  #?(:clj (:import [java.text Normalizer Normalizer$Form])))
+  (:require [clojure.string :as str]))
 
 
 (defn not-blank?
@@ -146,7 +145,7 @@
      ```"
      {:added "1.1"}
      [^String s]
-     (let [normalized-s  (Normalizer/normalize s Normalizer$Form/NFD)
+     (let [normalized-s  (java.text.Normalizer/normalize s java.text.Normalizer$Form/NFD)
            asciified-s   (str/replace normalized-s #"[\P{ASCII}]+" "")
            lower-cased-s (str/lower-case asciified-s)
            split-s       (str/split (str/triml lower-cased-s) #"[\p{Space}\p{P}]+")]
