@@ -2,6 +2,12 @@
                    ["Changelog" {:file "CHANGELOG.md"}]
                    ["Community" {}
                     ["Contributing" {:file "CONTRIBUTING.md"}]
-                    ["Code of Conduct" {:file "CODE_OF_CONDUCT.md"}]]
-                   ["Functionality" {}
-                    ["API" {:file "API.md"}]]]}
+                    ["Code of Conduct" {:file "CODE_OF_CONDUCT.md"}]
+                    ["License" {:file "LICENSE"}]
+                    ["Security Policy" {:file "SECURITY.md"}]]
+                   ["Adopted Patterns" {}
+                    ["Symbolic Keywords" {:file "doc/patterns/symbolic_keywords.md"}]]
+                   ["Developing" {}
+                    ["Required Tooling" {:file "doc/developing/001_required_tooling.md"}]
+                    ["Managed Tooling" {:file "doc/developing/002_managed_tooling.md"}]
+                    ["Required Tooling" {:file "doc/developing/003_contribution_guidelines.md"}]]]}
