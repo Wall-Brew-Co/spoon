@@ -8,6 +8,7 @@
     -  [`filter-by-values`](#com.wallbrew.spoon.core/filter-by-values) - Return <code>m</code> with only the key:value pairs whose values cause <code>pred</code> to evaluate truthily.
     -  [`remove-by-keys`](#com.wallbrew.spoon.core/remove-by-keys) - Return <code>m</code> with only the key:value pairs whose keys cause <code>pred</code> to evaluate falsily.
     -  [`remove-by-values`](#com.wallbrew.spoon.core/remove-by-values) - Return <code>m</code> with only the key:value pairs whose values cause <code>pred</code> to evaluate falsily.
+    -  [`submap?`](#com.wallbrew.spoon.core/submap?) - Returns true is <code>map1</code> is a "submap" of <code>map2</code>.
     -  [`when-let+`](#com.wallbrew.spoon.core/when-let+) - A multiple bindings version of <code>clojure.core/when-let</code>.
 -  [`com.wallbrew.spoon.spec`](#com.wallbrew.spoon.spec)  - Fuctions used in conjunction with <code>clojure.spec.alpha</code>.
     -  [`test-valid?`](#com.wallbrew.spoon.spec/test-valid?) - Tests if <code>value</code> is a valid instance of <code>spec</code>.
@@ -164,6 +165,27 @@ Return `m` with only the key:value pairs whose values cause `pred` to evaluate f
    ```clj
    (remove-by-values nil? {}) ; => {}
    (remove-by-values even? {:a 2 :b 1 :c 4 :d 6 :e 7}) ; => {:b 1 :e 7}
+   ```
+
+## <a name="com.wallbrew.spoon.core/submap?">`submap?`</a> [:page_facing_up:](null)
+<a name="com.wallbrew.spoon.core/submap?"></a>
+``` clojure
+
+(submap? map1 map2)
+```
+
+
+Returns true is `map1` is a "submap" of `map2`.
+   Meaning that `map2` contains all keys of `map1`, and that the values at those keys are either equal of themselves submaps.
+   Short-circuits on the first failed comparison.
+   
+   Example:
+   ```clj
+   (submap? {} {:a 1}) ; true
+   (submap? {:a {:b 1}} {:c 3 :a {:b 1 :d 2}}) ; true
+   (submap? {:a 1} {:a 1 b 2 :c 3}) ; true
+   (submap? {:f 4} {:a 1 b 2 :c 3}) ; false
+   (submap? {:a 1 :c 3} {:a 1 b 2 :c 3}) ; true
    ```
 
 ## <a name="com.wallbrew.spoon.core/when-let+">`when-let+`</a> [:page_facing_up:](null)

@@ -1,5 +1,8 @@
 (ns com.wallbrew.spoon.core-test
   (:require [clojure.test :refer [deftest is testing]]
+            [clojure.test.check.clojure-test :as check.test]
+            [clojure.test.check.generators :as generate]
+            [clojure.test.check.properties :as prop]
             [com.wallbrew.spoon.core :as sut]))
 
 
@@ -19,7 +22,7 @@
         "when-let+ can bind multiple values. When any bound value is nil, the body is not evaluated and nil is returned")
     (is (nil? (sut/when-let+ [a (get {:c nil} :c) b 2] (+ a b)))
         "when-let+ can bind multiple values. When any bound value evaluates to nil, the body is not evaluated and nil is returned"))
-  (testing "when-let+ implements vacuous truthiness in its bidnings. This is the same behavior as `let`"
+  (testing "when-let+ implements vacuous truthiness in its bindings. This is the same behavior as `let`"
     (is (= :empty
            (sut/when-let+ [] :empty)
            (let [] :empty)))))
@@ -78,3 +81,55 @@
     (is (= {:b {:c nil}} (sut/remove-by-keys nil? {nil :a :b {:c nil}})))
     (is (= {} (sut/remove-by-keys string? {"a" 1 "b" 3 "c" 5})))
     (is (= {:a [] :b 5 :c "hello"} (sut/remove-by-keys string? {:a [] :b 5 :c "hello"})))))
+
+
+(deftest submap?-test
+  (testing "\"Smaller\" maps are submaps of matching larger maps"
+    (is (true? (sut/submap? {} {})))
+    (is (true? (sut/submap? {} {:a 1})))
+    (is (true? (sut/submap? {:a 1} {:a 1})))
+    (is (true? (sut/submap? {:a {:b 1}} {:c 3 :a {:b 1 :d 2}})))
+    (is (true? (sut/submap? {:a {:b {:c 2 :cee 3}}}
+                            {:a {:bee 2 :b {:c 2 :cee 3}}})))
+    (is (true? (sut/submap? {nil "foo" :a false :b nil} {nil "foo" :bar 3 :baz false :a false :b nil})))
+    (is (false? (sut/submap? {:a 1} {})))
+    (is (false? (sut/submap? {:a 1} {:b 1})))
+    (is (false? (sut/submap? {:a {:b {:c 2 :eff "gee"}}}
+                             {:a {:bee 2 :b {:c 2 :cee 3}}})))))
+
+
+#_{:clj-kondo/ignore [:unresolved-symbol]}
+
+
+(check.test/defspec
+  submap?-type-test 50
+  (prop/for-all
+    [m1 (generate/map generate/any-equatable generate/any-equatable)
+     m2 (generate/map generate/any-equatable generate/any-equatable)]
+    (boolean? (sut/submap? m1 m2))))
+
+
+#_{:clj-kondo/ignore [:unresolved-symbol]}
+
+
+(check.test/defspec
+  filter-by-keys-gen-test 50
+  (prop/for-all
+    [m1 (generate/map generate/any-equatable generate/any-equatable)]
+    (if (or (contains? m1 nil) (contains? m1 false))
+      (= (dissoc m1 nil false)
+         (sut/filter-by-keys identity m1))
+      (= m1 (sut/filter-by-keys identity m1)))))
+
+
+#_{:clj-kondo/ignore [:unresolved-symbol]}
+
+
+(check.test/defspec
+  remove-by-keys-gen-test 50
+  (prop/for-all
+    [m1 (generate/map generate/any-equatable generate/any-equatable)]
+    (if (or (contains? m1 nil) (contains? m1 false))
+      (= (select-keys m1 [nil false])
+         (sut/remove-by-keys identity m1))
+      (empty? (sut/remove-by-keys identity m1)))))
