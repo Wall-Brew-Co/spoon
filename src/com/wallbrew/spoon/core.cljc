@@ -123,3 +123,30 @@
   [pred m]
   (letfn [(reducing-fn [m k v] (if (pred k) m (assoc m k v)))]
     (reduce-kv reducing-fn {} m)))
+
+
+(defn submap?
+  "Returns true is `map1` is a \"submap\" of `map2`.
+   Meaning that `map2` contains all keys of `map1`, and that the values at those keys are either equal of themselves submaps.
+   Short-circuits on the first failed comparison.
+   
+   Example:
+   ```clj
+   (submap? {} {:a 1}) ; true
+   (submap? {:a {:b 1}} {:c 3 :a {:b 1 :d 2}}) ; true
+   (submap? {:a 1} {:a 1 b 2 :c 3}) ; true
+   (submap? {:f 4} {:a 1 b 2 :c 3}) ; false
+   (submap? {:a 1 :c 3} {:a 1 b 2 :c 3}) ; true
+   ```"
+  {:added "1.5"}
+  [map1 map2]
+  (letfn [(submap-check
+            [acc k v]
+            (if (contains? map2 k)
+              (if (and (map? v) (map (get map2 k)))
+                (submap? v (get map2 k))
+                (if (= v (get map2 k))
+                  acc
+                  (reduced false)))
+              (reduced false)))]
+    (reduce-kv submap-check true map1)))
