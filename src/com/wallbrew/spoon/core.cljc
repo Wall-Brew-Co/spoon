@@ -142,8 +142,10 @@
   [map1 map2]
   (letfn [(submap-check
             [acc k v]
-            (if (contains? map2 k)
-              (if (and (map? v) (map (get map2 k)))
+            (if (and (map? map2)
+                     (contains? map2 k))
+              (if (and (map? v)
+                       (map (get map2 k)))
                 (submap? v (get map2 k))
                 (if (= v (get map2 k))
                   acc

@@ -105,7 +105,7 @@
 
 
 (check.test/defspec
-  submap?-type-test 100
+  submap?-type-test 500
   (prop/for-all
     [m1 (generate/map generate/any-equatable generate/any-equatable)
      m2 (generate/map generate/any-equatable generate/any-equatable)]
@@ -116,7 +116,7 @@
 
 
 (check.test/defspec
-  filter-by-keys-gen-test 100
+  filter-by-keys-gen-test 500
   (prop/for-all
     [m1 (generate/map generate/any-equatable generate/any-equatable)]
     (if (or (contains? m1 nil) (contains? m1 false))
@@ -129,7 +129,7 @@
 
 
 (check.test/defspec
-  remove-by-keys-gen-test 100
+  remove-by-keys-gen-test 500
   (prop/for-all
     [m1 (generate/map generate/any-equatable generate/any-equatable)]
     (if (or (contains? m1 nil) (contains? m1 false))
