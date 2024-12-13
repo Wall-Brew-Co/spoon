@@ -16,7 +16,7 @@
             [com.wallbrew/bouncer "1.1.1"]
             [com.wallbrew/lein-sealog "1.8.0"]
             [lein-cljsbuild/lein-cljsbuild "1.1.8"]
-            [mvxcvi/cljstyle "0.16.630"]
+            [mvxcvi/cljstyle "0.17.642"]
             [ns-sort/ns-sort "1.0.3"]]
   :resource-paths ["resources"]
   :deploy-branches ["master"]
