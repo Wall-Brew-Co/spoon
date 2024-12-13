@@ -1,6 +1,5 @@
 (ns com.wallbrew.spoon.core-test
-  (:require [clojure.spec.alpha :as spec]
-            [clojure.test :refer [deftest is testing]]
+  (:require [clojure.test :refer [deftest is testing]]
             [clojure.test.check.clojure-test :as check.test]
             [clojure.test.check.generators :as generate]
             [clojure.test.check.properties :as prop]
