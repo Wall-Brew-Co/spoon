@@ -4,7 +4,7 @@
   <groupId>com.wallbrew</groupId>
   <artifactId>spoon</artifactId>
   <packaging>jar</packaging>
-  <version>1.4.0</version>
+  <version>1.5.0</version>
   <name>spoon</name>
   <description>A collection of non-domain-specific utility functions.</description>
   <url>https://github.com/Wall-Brew-Co/spoon</url>
@@ -20,7 +20,7 @@
     <url>https://github.com/Wall-Brew-Co/spoon</url>
     <connection>scm:git:git://github.com/Wall-Brew-Co/spoon.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/Wall-Brew-Co/spoon.git</developerConnection>
-    <tag>f91e4f6a5fcbac97720c769601fdd5d22c59873c</tag>
+    <tag>5f330a222bebaa305ef6e0b57ac4719e29c9b918</tag>
   </scm>
   <build>
     <sourceDirectory>src</sourceDirectory>

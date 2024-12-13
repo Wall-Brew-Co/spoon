@@ -1,11 +1,11 @@
 {:version      {:major 1
-                :minor 3
+                :minor 5
                 :patch 0}
  :version-type :semver3
- :changes      {:added      []
+ :changes      {:added      ["`com.wallbrew.spoon.core/submap?` for loose map matching."]
                 :changed    []
                 :deprecated []
                 :removed    []
-                :fixed      ["Added the `<organization>` tag to the pom.xml file."]
+                :fixed      []
                 :security   []}
- :timestamp    "2024-09-21T16:32:51.990396427Z"}
+ :timestamp    "2024-12-13T16:07:31.229722586Z"}

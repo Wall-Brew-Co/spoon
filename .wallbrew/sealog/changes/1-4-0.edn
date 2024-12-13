@@ -2,8 +2,8 @@
                 :minor 4
                 :patch 0}
  :version-type :semver3
- :changes      {:added      ["`sealog.version` namespace with functions for working with Clojure versions."]
-                :changed    ["`sealog.core/when-let+` throws a more specific exception when the bindings vector contains an odd number of forms."]
+ :changes      {:added      ["`com.wallbrew.spoon.version` namespace with functions for working with Clojure versions."]
+                :changed    ["`com.wallbrew.spoon.core/when-let+` throws a more specific exception when the bindings vector contains an odd number of forms."]
                 :deprecated []
                 :removed    []
                 :fixed      []

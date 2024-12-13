@@ -3,14 +3,14 @@
                 :patch 0}
  :version-type :semver3
  :changes      {:added      ["A compatibility namespace to make it easier to use libraries that use functions that were added to Clojure in later versions."
-                             "An `update-vals` function that was added to Clojure in version 1.11."
-                             "An `update-keys` function that was added to Clojure in version 1.11."
-                             "A function `concatv` that concatenates into a vector, realizing the lazy results of `concat`."
-                             "A function `filter-by-values` that filters a map by values."
-                             "A function `filter-by-keys` that filters a map by keys."
-                             "A function `remove-by-values` that removes from a map by values."
-                             "A function `remove-by-keys` that removes from a map by keys."
-                             "A function `not-blank?` that checks if a string is not blank."]
+                             "A `com.wallbrew.spoon.compatibility/update-vals` function that was added to Clojure in version 1.11."
+                             "A `com.wallbrew.spoon.compatibility/update-keys` function that was added to Clojure in version 1.11."
+                             "A function `com.wallbrew.spoon.core/concatv` that concatenates into a vector, realizing the lazy results of `concat`."
+                             "A function `com.wallbrew.spoon.core/filter-by-values` that filters a map by values."
+                             "A function `com.wallbrew.spoon.core/filter-by-keys` that filters a map by keys."
+                             "A function `com.wallbrew.spoon.core/remove-by-values` that removes from a map by values."
+                             "A function `com.wallbrew.spoon.core/remove-by-keys` that removes from a map by keys."
+                             "A function `com.wallbrew.spoon.string/not-blank?` that checks if a string is not blank."]
                 :changed    []
                 :deprecated []
                 :removed    []
