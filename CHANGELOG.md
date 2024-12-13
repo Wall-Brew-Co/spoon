@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## Table of Contents
 
+* [1.5.0 - 2024-12-13](#150---2024-12-13)
 * [1.4.0 - 2024-10-07](#140---2024-10-07)
 * [1.3.0 - 2024-09-21](#130---2024-09-21)
 * [1.2.3 - 2024-05-03](#123---2024-05-03)
@@ -16,17 +17,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 * [1.0.1 - 2022-10-06](#101---2022-10-06)
 * [1.0.0 - 2022-10-06](#100---2022-10-06)
 
+## 1.5.0 - 2024-12-13
+
+* Added
+  * `com.wallbrew.spoon.core/submap?` for loose map matching.
+
 ## 1.4.0 - 2024-10-07
 
 * Added
-  * `sealog.version` namespace with functions for working with Clojure versions.
+  * `com.wallbrew.spoon.version` namespace with functions for working with Clojure versions.
 * Changed
-  * `sealog.core/when-let+` throws a more specific exception when the bindings vector contains an odd number of forms.
+  * `com.wallbrew.spoon.core/when-let+` throws a more specific exception when the bindings vector contains an odd number of forms.
 
 ## 1.3.0 - 2024-09-21
 
 * Fixed
-  * Added the `<orgnization>` tag to the pom.xml file.
+  * Added the `<organization>` tag to the pom.xml file.
 
 ## 1.2.3 - 2024-05-03
 
@@ -47,14 +53,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 * Added
   * A compatibility namespace to make it easier to use libraries that use functions that were added to Clojure in later versions.
-  * An `update-vals` function that was added to Clojure in version 1.11.
-  * An `update-keys` function that was added to Clojure in version 1.11.
-  * A function `concatv` that concatenates into a vector, realizing the lazy results of `concat`.
-  * A function `filter-by-values` that filters a map by values.
-  * A function `filter-by-keys` that filters a map by keys.
-  * A function `remove-by-values` that removes from a map by values.
-  * A function `remove-by-keys` that removes from a map by keys.
-  * A function `not-blank?` that checks if a string is not blank.
+  * A `com.wallbrew.spoon.compatibility/update-vals` function that was added to Clojure in version 1.11.
+  * A `com.wallbrew.spoon.compatibility/update-keys` function that was added to Clojure in version 1.11.
+  * A function `com.wallbrew.spoon.core/concatv` that concatenates into a vector, realizing the lazy results of `concat`.
+  * A function `com.wallbrew.spoon.core/filter-by-values` that filters a map by values.
+  * A function `com.wallbrew.spoon.core/filter-by-keys` that filters a map by keys.
+  * A function `com.wallbrew.spoon.core/remove-by-values` that removes from a map by values.
+  * A function `com.wallbrew.spoon.core/remove-by-keys` that removes from a map by keys.
+  * A function `com.wallbrew.spoon.string/not-blank?` that checks if a string is not blank.
 * Fixed
   * CHANGELOG management is now handled by [sealog.](https://github.com/Wall-Brew-Co/lein-sealog)
 
