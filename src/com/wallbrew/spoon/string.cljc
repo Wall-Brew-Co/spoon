@@ -150,5 +150,3 @@
            lower-cased-s (str/lower-case asciified-s)
            split-s       (str/split (str/triml lower-cased-s) #"[\p{Space}\p{P}]+")]
        (str/join "-" split-s))))
-
-
