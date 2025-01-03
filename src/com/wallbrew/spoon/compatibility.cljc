@@ -44,5 +44,3 @@
               "update-vals"]}
   [m f & args]
   (reduce-kv (fn [m' k v] (assoc m' (apply f k args) v)) {} m))
-
-
