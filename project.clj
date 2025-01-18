@@ -7,17 +7,17 @@
             :comments     "Same-as all Wall-Brew projects"}
   :scm {:name "git"
         :url  "https://github.com/Wall-Brew-Co/spoon"}
+  :global-vars {*warn-on-reflection* true}
   :pom-addition [:organization
                  [:name "Wall Brew Co."]
                  [:url "https://wallbrew.com"]]
   :dependencies [[org.clojure/clojure "1.12.0"]
                  [org.clojure/clojurescript "1.11.132" :scope "provided"]]
   :plugins [[com.github.clj-kondo/lein-clj-kondo "2024.11.14"]
-            [com.wallbrew/bouncer "1.1.1"]
+            [com.wallbrew/bouncer "1.2.0"]
             [com.wallbrew/lein-sealog "1.8.0"]
             [lein-cljsbuild/lein-cljsbuild "1.1.8"]
-            [mvxcvi/cljstyle "0.17.642"]
-            [ns-sort/ns-sort "1.0.3"]]
+            [mvxcvi/cljstyle "0.17.642"]]
   :resource-paths ["resources"]
   :deploy-branches ["master"]
   :deploy-repositories [["clojars" {:url           "https://clojars.org/repo"
