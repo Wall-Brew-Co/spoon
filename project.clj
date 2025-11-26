@@ -29,7 +29,7 @@
 
   :profiles {:uberjar {:aot :all}
              :dev     {:dependencies [[doo/doo "0.1.11"]
-                                      [org.clojure/test.check "1.1.1"]]
+                                      [org.clojure/test.check "1.1.2"]]
                        :plugins      [[lein-doo/lein-doo "0.1.11"]]}}
 
   :min-lein-version "2.5.3"
