@@ -11,7 +11,7 @@
   :pom-addition [:organization
                  [:name "Wall Brew Co."]
                  [:url "https://wallbrew.com"]]
-  :dependencies [[org.clojure/clojure "1.12.4"]
+  :dependencies [[org.clojure/clojure "1.12.5"]
                  [org.clojure/clojurescript "1.12.134" :scope "provided"]]
   :plugins [[com.github.clj-kondo/lein-clj-kondo "2026.04.15"]
             [com.wallbrew/bouncer "1.2.0"]
